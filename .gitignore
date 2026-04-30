@@ -203,3 +203,6 @@ TAGS
 build/
 bin/
 dist/
+
+!.vscode/tasks.json
+!.vscode/launch.json
