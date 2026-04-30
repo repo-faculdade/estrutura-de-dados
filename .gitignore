@@ -189,3 +189,17 @@ TAGS
 
 # Ctags
 .ctags
+# C++ compiled files
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+*.dll
+*.dylib
+
+# Common build folders
+build/
+bin/
+dist/
