@@ -1,14 +1,9 @@
-// A Secretaria de Trânsito quer ordenar os valores de 6 multas: {500, 130, 880, 195, 290, 880}. O hardware do servidor é antigo e queremos poupar a memória RAM.
-// Missão: Implemente o Selection Sort. Crie uma variável contador_trocas. Incremente essa variável apenas quando o comando de troca (swap) for executado. Imprima o total no final. 
-
-
 #include <stdio.h>
 
-// Func Aux pra imprimir o vetor formatado
-void imprimirVetor(int senhas[], int tamanho) {
+void imprimirVetor(int multas[], int tamanho) {
     printf("[");
     for (int i = 0; i < tamanho; i++) {
-        printf("%02d, ", senhas[i]);
+        printf("%02d, ", multas[i]);
     }
     printf("]");
 }
@@ -33,18 +28,20 @@ void selectionSort(int multas[], int tamanho) {
             contador_trocas++;
         }
     }
-    printf("Multas ordenadas:");
+    printf("Multas ordenadas:\n");
     imprimirVetor(multas, tamanho);
     printf("\nTotal de trocas: %d\n", contador_trocas);
 }
 
 int main() {
     printf("==== ATIVIDADE 2 ====");
-    printf("\n Ordenando multas. \n\n");
+    printf("\nOrdenando multas. \n\n");
 
     int multas[] = {500, 130, 880, 195, 290, 880};
     int tamanho = 6;
-
+    printf("Multas Originais:\n");
+    imprimirVetor(multas, tamanho);
+    printf("\n\n");
     selectionSort(multas, tamanho);
 
     return 0;
