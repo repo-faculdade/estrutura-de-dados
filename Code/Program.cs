@@ -6,7 +6,7 @@ using System.Collections.Generic;
 class Program
 {
     // Altere para false quando não quiser exibir os passos
-    const bool mostrarPassos = false;
+    static bool mostrarPassos = false;
 
     static void Main()
     {
@@ -25,17 +25,7 @@ class Program
             "Parcialmente ordenado",
             "Totalmente Desordenado"
         };
-
-        Console.WriteLine("Resultados da ordenação QuickSort");
-        Console.WriteLine();
-
-        Console.WriteLine("{0,-20} {1,-25} {2}",
-            "Situação inicial",
-            "Quantidade de elementos",
-            "Tempo de ordenação");
-
-        Console.WriteLine(new string('-', 75));
-
+        
         var resultados = new List<string>();
 
         for (int i = 0; i < arquivos.Length; i++)
@@ -54,7 +44,9 @@ class Program
                 .Select(int.Parse)
                 .ToArray();
 
-            // A medição não inclui as mensagens exibidas na tela
+            int[] aquecimento = (int[])valores.Clone();
+            QuickSort(aquecimento, 0, aquecimento.Length - 1, false, 0);
+
             Stopwatch cronometro = Stopwatch.StartNew();
 
             QuickSort(valores, 0, valores.Length - 1, false, 0);
@@ -71,11 +63,7 @@ class Program
                 Console.WriteLine();
                 Console.WriteLine($"========== PASSOS: {situacoes[i]} ==========");
 
-                int[] copia = (int[])valores.Clone();
-
-                // Para visualizar a ordenação desde o início,
-                // é necessário ler novamente o arquivo original.
-                copia = File.ReadAllText(caminho)
+                int[] copia = File.ReadAllText(caminho)
                     .Split(new[] { ' ', '\n', '\r', '\t', ',', ';' },
                         StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
@@ -85,15 +73,27 @@ class Program
 
                 Console.WriteLine("Vetor ordenado:");
                 ImprimirVetor(copia);
-                Console.WriteLine();
+
+                Console.WriteLine("Pressione uma tecla para continuar...");
+                Console.ReadKey();
             }
-            Console.WriteLine("Pressione uma tecla para continuar...");
-            Console.ReadKey();
         }
 
         Console.WriteLine();
-        Console.WriteLine("Resultados:");
-        Console.WriteLine(string.Join("\n", resultados));
+        Console.WriteLine("Resultados da ordenação QuickSort");
+        Console.WriteLine();
+
+        Console.WriteLine("{0,-25} {1,-25} {2}",
+            "Situação inicial",
+            "Quantidade de elementos",
+            "Tempo de ordenação");
+
+        Console.WriteLine(new string('-', 80));
+
+        foreach (string resultado in resultados)
+        {
+            Console.WriteLine(resultado);
+        }
     }
 
     static void QuickSort(
